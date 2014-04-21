@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Christian Tape Ministry</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_tv">Hello tv!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_ministry_detail">MinistryDetailActivity</string>
+    <string name="title_placeholder">title placeholder</string>
+    <string name="speaker_placeholder">speaker_placeholder</string>
+    <string name="venue_placeholder">venue_placeholder</string>
+    <string name="date_placeholder">date_placeholder</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="retry_button">Retry</string>
+    <string name="message_placeholder">Message goes here</string>
+    <string name="watch_button">Watch</string>
+
+</resources>
