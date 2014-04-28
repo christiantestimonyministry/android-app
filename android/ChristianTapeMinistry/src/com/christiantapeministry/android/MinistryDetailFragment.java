@@ -1,10 +1,14 @@
 package com.christiantapeministry.android;
 
+import java.io.IOException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,8 +30,10 @@ import com.christiantapeministry.android.network.LoadHREF;
 			JSONDataReceiverIF {
 		
 		private			String		videoURL;
+		private			String		audioURL;
 		
 		public MinistryDetailFragment() {
+			super();
 		}
 
 		@Override
@@ -73,16 +79,30 @@ import com.christiantapeministry.android.network.LoadHREF;
 				populateReferences(json);
 				
 				Boolean		videoStreamPresent = false;
+				Boolean 	audioStreamPresent = false;
 				JSONArray mediaData = json.getJSONArray("mediaData");
 				for(int i=0;i<mediaData.length();i++) {
 					JSONObject media = mediaData.getJSONObject(i);
 					
 					String mediaType = media.getString("mediaType");
-					if ("7".equals(mediaType)) {
-
+					if ("3".equals(mediaType)) {
+						Button listenButton = (Button) rootView.findViewById(R.id.ministryDetailListenButton);
+						audioStreamPresent= true;
+						audioURL = media.getString("streamURL");
+						listenButton.setOnClickListener(new View.OnClickListener() {
+				             public void onClick(View v) {
+				                 Log.d(this.getClass().getName(), "Watch button pressed on audio "+videoURL);
+				                 
+				                 Intent videoIntent = new Intent(v.getContext(), MediaActivity.class );
+				                 videoIntent.putExtra("URL", audioURL);
+				                 videoIntent.putExtra("mediaType", "3");
+				                 startActivity(videoIntent);
+				                 
+				             }
+				         });
 					}
 					if ("8".equals(mediaType)) {
-						
+						// video
 						videoStreamPresent = true;
 						Button watchButton = (Button) rootView.findViewById(R.id.ministryDetailWatchButton);
 						
@@ -91,14 +111,40 @@ import com.christiantapeministry.android.network.LoadHREF;
 				             public void onClick(View v) {
 				                 Log.d(this.getClass().getName(), "Watch button pressed on video "+videoURL);
 				                 
-				                 Intent videoIntent = new Intent(v.getContext(), MediaActivity.class );
-				                 videoIntent.putExtra("URL", videoURL);
-				                 startActivity(videoIntent);
+				                 try {
+//									MediaPlayer mp = new MediaPlayer();
+//									 Uri uri = Uri.parse(videoURL);
+//									 mp.setDataSource(videoURL);
+//									 
+//									 mp.prepare();
+//									 mp.start();
+									 
+									 Intent videoIntent = new Intent(v.getContext(), MediaActivity.class );
+									 videoIntent.putExtra("URL", videoURL);
+									 videoIntent.putExtra("mediaType", "8");
+									 startActivity(videoIntent);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} 
 				                 
 				             }
 				         });
 						
 					}
+				}
+				if (!videoStreamPresent) {
+					// hide the watch button
+					Button watchButton = (Button) rootView.findViewById(R.id.ministryDetailWatchButton);
+					watchButton.setVisibility(View.GONE);
+				}
+				if (!audioStreamPresent) {
+					Button listenButton = (Button) rootView.findViewById(R.id.ministryDetailListenButton);
+					listenButton.setVisibility(View.GONE);
+				}
+				if (!audioStreamPresent && !videoStreamPresent) {
+					LinearLayout buttonArea = (LinearLayout) rootView.findViewById(R.id.ministrydetailButtonArea);
+					buttonArea.setVisibility(View.GONE);
 				}
 
 			} catch (JSONException je) {

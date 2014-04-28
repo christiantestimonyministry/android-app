@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="MenuDrawerStyle"
+    android:id="@+id/menu_item_title"
+    style="@style/MenuDrawerStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="3dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginTop="3dp"
-    android:textColor="#ff0000"
-    android:textSize="42sp" >
+	android:textColor="#010101"
+	>
 
 </TextView>

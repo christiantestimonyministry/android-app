@@ -1,9 +1,34 @@
 {
   "menu": [
     {
+      "response-type": "detailList",
       "primary": true,
       "title": "Recent",
       "href": "http://www.christiantapeministry.com/svc-get-recent.php"
+    },
+    {
+      "response-type": "metadataList",
+      "href": "http://www.christiantapeministry.com/svc-metadata-list.php?type=speakers",
+      "title": "Speakers",
+      "primary": false
+    },
+    {
+      "response-type": "metadataList",
+      "href": "http://www.christiantapeministry.com/svc-metadata-list.php?type=subjects",
+      "title": "Subjects",
+      "primary": false
+    },
+    {
+      "response-type": "metadataList",
+      "href": "http://www.christiantapeministry.com/svc-metadata-list.php?type=venues",
+      "title": "Venues",
+      "primary": false
+    },
+    {
+      "response-type": "content",
+      "href": "http://www.christiantapeministry.com/svc-content.php?topic=about",
+      "title": "About us",
+      "primary": false
     }
   ]
 }

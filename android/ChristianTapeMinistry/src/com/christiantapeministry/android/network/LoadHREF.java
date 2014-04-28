@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.zip.GZIPInputStream;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -15,7 +17,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
@@ -49,11 +50,19 @@ public class LoadHREF extends AsyncTask<String, Integer, String> {
 
 			HttpPost httpPost = new HttpPost(url_select);
 			httpPost.setEntity(new UrlEncodedFormEntity(param));
+			httpPost.setHeader("Accept-Encoding", "gzip");
+			
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			HttpEntity httpEntity = httpResponse.getEntity();
 
 			// Read content & Log
 			inputStream = httpEntity.getContent();
+			
+			Header contentEncoding = httpResponse.getFirstHeader("Content-Encoding");
+			if (contentEncoding != null && contentEncoding.getValue().equalsIgnoreCase("gzip")) {
+				inputStream = new GZIPInputStream(inputStream);
+			}
+			
 		} catch (UnsupportedEncodingException e1) {
 			Log.e("UnsupportedEncodingException", e1.toString());
 			e1.printStackTrace();

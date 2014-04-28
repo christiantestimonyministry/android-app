@@ -18,5 +18,7 @@
     <string name="retry_button">Retry</string>
     <string name="message_placeholder">Message goes here</string>
     <string name="watch_button">Watch</string>
+    <string name="listen_button">Listen</string>
+    <string name="count_placeholder">99</string>
 
 </resources>

@@ -35,7 +35,7 @@ public class MinistryArrayAdapter<T> extends ArrayAdapter<T> {
 			convertView = inflater.inflate(R.layout.ministry_list_cell, parent, false);
 		}
 		JSONObject obj = (JSONObject) getItem(position);
-		Log.d(this.getClass().getName(), "In getView, postion = "+position);
+		
 		try {
 			TextView title = (TextView) convertView.findViewById(R.id.ministryListTitle);
 			title.setText(obj.getString("title"));

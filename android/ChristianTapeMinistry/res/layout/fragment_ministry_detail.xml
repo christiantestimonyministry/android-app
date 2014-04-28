@@ -16,11 +16,11 @@
      android:layout_marginTop="0dp" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/ministryDetailListenButton"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:text="Button" />
+            android:text="@string/listen_button" />
 
         <Button
             android:id="@+id/ministryDetailWatchButton"
